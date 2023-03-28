@@ -1,5 +1,5 @@
 import math
-import numpy as np
+
 
 
 def printGrid(grid, rows, cols):
