@@ -1,7 +1,6 @@
 import math
 
 
-
 def printGrid(grid, rows, cols):
     print("Current instance of The game is -\n\n")
     for i in range(rows):
