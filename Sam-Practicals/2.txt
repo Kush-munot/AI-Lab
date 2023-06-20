@@ -1,0 +1,92 @@
+# initialize initial state 
+a=4
+b=3
+start=[0,0]
+#goal=[2,n] n can be 0,1,2,3
+
+# defining rules
+def fill4():
+    start[0]=4
+    print(start)
+
+def fill3():
+    start[1]=3
+    print(start)
+
+def empty4():
+    start[0]=0
+    print(start)
+
+def empty3():
+    start[1]=0
+    print(start)
+
+def until4full():
+    start[1]=start[1]-(4-start[0])
+    start[0]=4
+    print(start)
+
+def until3full():
+    start[0]=start[0]-(3-start[1])
+    start[1]=3
+    print(start)
+
+def all3to4():
+    start[0]+=start[1]
+    start[1]=0
+    print(start)
+    
+def all4to3():
+    start[1]+=start[0]
+    start[0]=0
+    print(start)
+
+
+
+def waterjug(start):
+        if(start[0]==2 or start[1]==2):
+            return 
+        elif(start[0]!=0 and start[1]!=3):
+              if((start[0]+start[1])>=3):
+                until3full()
+                waterjug(start)
+              else:
+                all4to3()
+                waterjug(start)
+        elif(start[1]==3):
+              empty3()
+              waterjug(start)
+        elif(start[0]==0 and start[1]!=0):
+              fill4()
+              waterjug(start)
+
+def waterjug1(start):
+        if(start[0]==2 or start[1]==2):
+            return
+        elif(start[0]==4):
+            empty4()
+            waterjug1(start)
+        elif(start[0]!=4 and start[1]!=0):
+            if((start[0]+start[1])>=4):
+                until4full()
+                waterjug1(start)
+            else:
+                all3to4()
+                waterjug1(start)
+        elif(start[0]!=0 and start[1]==0):
+            fill3()
+            waterjug1(start)
+        
+      
+      
+
+        
+s=input("Enter from which jug you want to start: a(capacity 4) or b(capacity 3) :")
+if(s=='a'):
+  print(start)
+  fill4()
+  waterjug(start)
+else:
+  print(start)
+  fill3()
+  waterjug1(start)

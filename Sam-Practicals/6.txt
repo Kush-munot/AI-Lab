@@ -1,0 +1,66 @@
+#Import the random library  
+import random 
+from matplotlib import pyplot as plt
+import math
+X=[]
+Y=[]
+random.seed(42)#fixing those points to avoid confusion
+for i in range(1,21):
+  x=random.randint(0,50)
+  X.append(x)
+  y=random.randint(0,50)
+  Y.append(y)
+  
+# print(X)
+# print(Y)
+
+# assigning classes
+#if any of the x or y coordinate is below 26 then it is class A else it is class B
+classes=[]
+for j in range(0,20):
+  if(X[j]<26 or Y[j]<26):
+    classes.append(0)
+  else:
+    classes.append(1)
+
+# print(classes)
+
+#plotting the points
+ 
+color =  ["green" if item==0 else "red" for item in classes]
+plt.scatter(X,Y,c=color);
+
+def KNN(x1,y1):
+    distances={}
+    for i in range(0,20):
+      pt1=[]
+      pt1.append(x1)
+      pt1.append(y1)
+      pt2=[]
+      pt2.append(X[i])
+      pt2.append(Y[i])
+      distances[i]=math.dist(pt1,pt2)
+
+    #sorted dictionary
+    sorted_dict=sorted(distances.items(),key=lambda x:x[1])
+    distances=dict(sorted_dict)
+
+
+    print(distances)
+    keys_list=list(distances.keys())
+    print(keys_list)
+    for i in range(1,6):
+      print("Classification using K=",i)
+      class_val=0
+      for j in range(0,i):
+        class_val+=classes[keys_list[j]]
+      if(class_val< i/2):
+        print('0')
+      else:
+        print('1')
+
+
+#take a user input
+x1=int(input("Enter x coordinate of the point:"))
+y1=int(input("Enter y coordinate of the point: "))
+KNN(x1,y1)

@@ -1,0 +1,27 @@
+Total_Exp= 10
+Yes=5
+No=5
+E_Yes=Yes/Total_Exp;
+E_No=No/Total_Exp;
+
+Red_Yes = 3/5
+Red_No = 2/5
+
+SUV_Yes = 1/5
+SUV_No = 3/5
+
+Domestic_Yes = 2/5
+Domestic_No = 3/5
+
+P_Yes = E_Yes * Red_Yes * SUV_Yes * Domestic_Yes
+P_No = E_No * Red_No * SUV_No * Domestic_No
+
+Yes_pc=(P_Yes/(P_Yes+P_No))*100
+No_pc=(P_No/(P_Yes+P_No))*100
+print('Probability percentage of Yes when Its a domestic red SUV is : ',Yes_pc)
+print('Probability percentage of No when when Its a domestic red SUV is : ',No_pc)
+
+if(Yes_pc > No_pc):
+  print('YES')
+else :
+  print('NO')

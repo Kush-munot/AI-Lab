@@ -1,0 +1,60 @@
+and_gate = {
+    'X1' : [1,1,-1,-1],
+    'X2' : [1,-1,1,-1],
+    'y' : [1,-1,-1,-1]
+}
+
+
+x1=int(input("Enter value of x1 : "))
+x2= int (input("Enter value of x2 : "))
+w1= int (input("Enter value of w1 : "))
+w2=int (input("Enter value of w2 : "))
+bias=int (input("Enter value of bias : "))
+
+alpha=1
+j=0
+i=0
+count=1
+yin=x1*w1+x2*w2+bias
+print("i\tj\tX1\t X2\t W1\t W2\t BIAS\tACT\n")
+# print(and_gate['X1'][i],"\t",and_gate['X2'][i],"\t",w1,"\t",w2,"\t",bias)
+result=0
+
+
+while result!=1:
+  yin=and_gate['X1'][i]*w1+and_gate['X2'][i]*w2+bias
+  print("yin : ",yin)
+  if(yin<0):
+   act=-1
+  elif(yin==0):
+    act=0
+  else:
+    act=1
+  
+#  for i in range(0,4):
+ 
+  print(i,"\t",j,"\t",and_gate['X1'][i],"\t",and_gate['X2'][i],"\t",w1,"\t",w2,"\t",bias,"\t",act)
+
+  # if(x1==and_gate['X1'][i] and x2==and_gate['X2'][i] ):
+  if(act==and_gate['y'][j]):
+    result=1
+    break
+    # else:
+    #   result = 0
+    #   i=i+1
+      
+ 
+
+  if(result==0): #updating weights and bias
+    print("c: ",count,"\n")
+    count+=1
+
+    w1n=w1+alpha*and_gate['y'][j]*and_gate['X1'][j]
+    w2n=w2+alpha*and_gate['y'][j]*and_gate['X2'][j]
+    bias_new=bias+alpha*and_gate['y'][j]
+    j+=1
+    i+=1
+    w1=w1n
+    w2=w2n
+    bias=bias_new
+

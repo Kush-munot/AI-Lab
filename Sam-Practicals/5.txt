@@ -1,0 +1,44 @@
+import math
+
+def next_power_of_2(x):
+    return 1 if x == 0 else math.ceil(math.log2(x))
+
+MAX, MIN = 1000, -1000
+
+def minimax(depth, nodeIndex, maximizingPlayer,
+			values, alpha, beta, depth_val):
+
+	if depth == depth_val:
+		return values[nodeIndex]
+
+	if maximizingPlayer:
+	
+		best = MIN
+
+		for i in range(0, 2):			
+			val = minimax(depth + 1, nodeIndex * 2 + i, False, values, alpha, beta, depth_val)
+			best = max(best, val)
+			alpha = max(alpha, best)
+			if beta <= alpha:
+				break
+		return best
+	
+	else:
+		best = MAX
+		for i in range(0, 2):
+		
+			val = minimax(depth + 1, nodeIndex * 2 + i,
+							True, values, alpha, beta, depth_val)
+			best = min(best, val)
+			beta = min(beta, best)
+
+			if beta <= alpha:
+				break
+		
+		return best
+	
+if __name__ == "__main__":
+
+	values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
+	depth_val = next_power_of_2(len(values))
+	print("The optimal value is :", minimax(0, 0, True, values, MIN, MAX,depth_val))
